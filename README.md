@@ -27,7 +27,7 @@
 
         Contact Info Edit Screen
 
-![edit_contact_info](https://user-images.githubusercontent.com/39756478/84576698-6d800580-add4-11ea-9274-7212e03fcd95.png)
+![edit_contact_info](https://user-images.githubusercontent.com/39756478/84576808-1595ce80-add5-11ea-83ce-85911e3eebda.png)
 
 
         Contact Info Detail Screen
