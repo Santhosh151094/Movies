@@ -1,7 +1,28 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Component } from "react";
 import { Modal, Button, Form, Input } from "antd";
 
-class ContactModal extends Component {
+export interface ICommonModalData {}
+
+export interface ICommonModalHocData {}
+
+export interface ICommonModalCallbacks {
+  handleLoading?(): any;
+}
+
+export interface ICommonModalHocCallbacks {}
+
+export interface ICommonModalProps
+  extends ICommonModalData,
+    ICommonModalHocData,
+    ICommonModalCallbacks,
+    ICommonModalHocCallbacks {}
+
+export interface ILocalState {
+  visible?: boolean;
+}
+
+class CommonModal extends React.Component<ICommonModalProps, ILocalState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +31,7 @@ class ContactModal extends Component {
   }
 
   componentDidMount() {
-    console.log("props", this.props);
+    //console.log("props", this.props);
   }
 
   showModal = () => {
@@ -20,22 +41,19 @@ class ContactModal extends Component {
   };
 
   handleOk = (e) => {
-    console.log(e);
     this.setState({
       visible: false,
     });
   };
 
   handleCancel = (e) => {
-    console.log(e);
     this.setState({
       visible: false,
     });
   };
 
   contactSubmit = (e) => {
-    console.log("e", e);
-    fetch(process.env.REACT_APP_API_URL, {
+    fetch(`${process.env.REACT_APP_API_URL}`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -48,23 +66,33 @@ class ContactModal extends Component {
     this.setState({
       visible: false,
     });
-    this.props.handleLoading(true);
+    //this.props.handleLoading(true);
   };
 
   render() {
-    console.log("props", this.props);
     return (
       <div>
-        <Button type="primary" onClick={this.showModal}>
-          Add Contact
-        </Button>
+        <div style={{ display: "flex" }}>
+          <Button
+            type="primary"
+            onClick={this.showModal}
+            style={{ marginBottom: "10px", marginLeft: "auto" }}
+          >
+            Add Contact
+          </Button>
+        </div>
         <Modal
           title="Add Contact"
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           footer={[
-            <Button form="contactForm" key="submit" htmlType="submit">
+            <Button
+              type="primary"
+              form="contactForm"
+              key="submit"
+              htmlType="submit"
+            >
               Submit
             </Button>,
           ]}
@@ -73,7 +101,6 @@ class ContactModal extends Component {
             //{...layout}
             name="contactForm"
             onFinish={this.contactSubmit}
-            resetFields={[]}
           >
             <Form.Item
               name="name"
@@ -130,4 +157,4 @@ class ContactModal extends Component {
   }
 }
 
-export default ContactModal;
+export default CommonModal;
