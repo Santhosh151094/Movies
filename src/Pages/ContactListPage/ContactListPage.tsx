@@ -9,15 +9,16 @@ import {
   Form,
   Input,
   Spin,
+  Alert,
 } from "antd";
-import CommonModal from "../../Components/CommonModal/CommonModal";
+import AddContact from "../../Components/AddContact/AddContact";
 import {
   DeleteOutlined,
   WechatOutlined,
   FundViewOutlined,
   EditOutlined,
 } from "@ant-design/icons";
-import Detail from "../../Components/Detail/Detail";
+import ss from "./ContactListPage.module.scss";
 
 export interface IContactListPageData {
   editValue?: boolean | undefined;
@@ -25,9 +26,7 @@ export interface IContactListPageData {
 
 export interface IContactListPageHocData {}
 
-export interface IContactListPageCallbacks {
-  editHandled?(): any | undefined;
-}
+export interface IContactListPageCallbacks {}
 
 export interface IContactListPageHocCallbacks {}
 
@@ -43,6 +42,7 @@ export interface ILocalState {
   detail?: any;
   loading?: boolean;
   editModal?: boolean;
+  message?: string;
 }
 
 class ContactListPage extends React.Component<
@@ -57,6 +57,7 @@ class ContactListPage extends React.Component<
       detail: {},
       loading: true,
       editModal: false,
+      message: "",
     };
   }
 
@@ -74,6 +75,7 @@ class ContactListPage extends React.Component<
       method: "delete",
       headers: { "Content-Type": "application/json" },
     }).then((response) => response.json());
+    this.setState({ message: "Contact Deleted Successfully!" });
     this.componentDidMount();
   };
 
@@ -98,7 +100,10 @@ class ContactListPage extends React.Component<
   };
 
   handleEdit = (item) => {
-    this.setState({ editModal: true, detail: item });
+    this.setState({
+      editModal: true,
+      detail: item,
+    });
   };
 
   contactSubmit = (item) => {
@@ -114,9 +119,9 @@ class ContactListPage extends React.Component<
     });
     this.setState({
       editModal: false,
+      message: "Contact Edited Successfully!",
     });
     this.componentDidMount();
-    //this.props.handleLoading(true);
   };
 
   render() {
@@ -155,65 +160,39 @@ class ContactListPage extends React.Component<
           <span>
             <EditOutlined
               onClick={() => this.handleEdit(record)}
-              style={{ fontSize: "20px", color: "#1890ff" }}
+              className={ss.editIcon}
             />
             <FundViewOutlined
               onClick={() => this.handleDetail(record)}
-              style={{
-                fontSize: "20px",
-                color: "#1890ff",
-                marginLeft: "30px",
-                cursor: "pointer",
-              }}
+              className={ss.detailIcon}
             />
             <Popconfirm
               title="Sure to delete?"
               onConfirm={() => this.handleDelete(record.id)}
             >
-              <DeleteOutlined
-                style={{ fontSize: "20px", color: "red", marginLeft: "30px" }}
-              />
+              <DeleteOutlined className={ss.deleteIcon} />
             </Popconfirm>
 
             <Popover content={"Chat feature Coming soon!!"} trigger="hover">
-              <WechatOutlined
-                style={{
-                  fontSize: "20px",
-                  marginLeft: "30px",
-                  color: "#1890ff",
-                  cursor: "pointer",
-                }}
-              />
+              <WechatOutlined className={ss.chatIcon} />
             </Popover>
           </span>
         ),
       },
     ];
 
-    const IDetailProp = {
-      // make sure all required component's inputs/Props keys&types match
-      editValue: this.state.editModal,
-    };
-    // const IDetailCallbacks = {
-    //   editHandled: this.handleEdit,
-    // };
-
     return (
       <div>
         <Spin spinning={this.state.loading}>
-          <CommonModal />
+          {this.state.message && (
+            <Alert message={this.state.message} type="success" showIcon />
+          )}
+          <AddContact />
           <Table
             bordered={true}
             rowKey="id"
             columns={columns}
             dataSource={list}
-            // onRow={(record, rowIndex) => {
-            //   return {
-            //     onClick: (event) => {
-            //       this.handleDetail(record);
-            //     },
-            //   };
-            // }}
           />
 
           {/* Detail */}
