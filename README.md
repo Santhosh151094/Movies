@@ -16,7 +16,7 @@
 
         npm start
 
-## Screenshots of Contact Screens
+## Contact Screens
 
         Contact List Screen
 
