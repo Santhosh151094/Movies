@@ -16,12 +16,15 @@
 
         Movie List Tab 1 Screen
 
-![contact_list](https://user-images.githubusercontent.com/39756478/84576549-29403580-add3-11ea-9c98-1e61a661bf71.png)
+![Movies_List_With_Pagination](https://user-images.githubusercontent.com/39756478/85229006-d125b680-b404-11ea-86a3-706e145d26ee.png)
+
 
         Movie Detail Screen
 
-![add_contact_info](https://user-images.githubusercontent.com/39756478/84576689-53462780-add4-11ea-90e4-77dd45cc85e6.png)
+![Movie_details](https://user-images.githubusercontent.com/39756478/85229038-18ac4280-b405-11ea-9213-4b70d17c8327.png)
+
 
         Movie Poster Tab 2 Screen
 
-![edit_contact_info](https://user-images.githubusercontent.com/39756478/84576808-1595ce80-add5-11ea-83ce-85911e3eebda.png)
+![Movies_poster](https://user-images.githubusercontent.com/39756478/85229050-25c93180-b405-11ea-8cf3-6f68692b8414.png)
+
