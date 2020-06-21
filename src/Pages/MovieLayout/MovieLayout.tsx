@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
-import ContactListPage from "../ContactListPage/ContactListPage";
-import ss from "./ContactLayout.module.scss";
+import MoviesListPage from "../MoviesListPage/MoviesListPage";
+import ss from "./MovieLayout.module.scss";
 const { Header, Content, Footer } = Layout;
 
-class ContactLayout extends Component {
+class MovieLayout extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      contacts: [],
-    };
+    this.state = {};
   }
 
   render() {
@@ -34,8 +32,8 @@ class ContactLayout extends Component {
             className="site-layout-background"
             style={{ padding: 24, minHeight: 380 }}
           >
-            <p className={ss.heading}>Manage Contact</p>
-            <ContactListPage />
+            <p className={ss.heading}>Movies</p>
+            <MoviesListPage />
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -46,4 +44,4 @@ class ContactLayout extends Component {
   }
 }
 
-export default ContactLayout;
+export default MovieLayout;
